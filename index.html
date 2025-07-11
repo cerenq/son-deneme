@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mektubun - 29 Temmuz 2025'te Açılacak</title>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f3ece6; /* krem-pastel */
+    color: #5a4d3a;      /* kahverengi tonları */
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 520px;
+    margin: 40px auto;
+    background: #e7dfd6; /* açık pastel krem */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(90,77,58,0.15);
+    padding: 30px 40px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #7a6a4f;
+  }
+  p.info {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  .hidden {
+    display: none;
+  }
+  label {
+    display: block;
+    margin: 15px 0 6px 0;
+    font-weight: 600;
+  }
+  input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: #a99a7e;
+    color: #f3ece6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #8b7d63;
+  }
+  .message {
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  a.notion-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #7a6a4f;
+    color: #f3ece6;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  a.notion-link:hover {
+    background: #5f523a;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="app">
+
+  <h1>29 Temmuz 2025'te Açılacak Mektup</h1>
+  <p class="info" id="infoText"></p>
+
+  <form id="quizForm" class="hidden">
+    <div class="question" id="q1">
+      <label>1. En sevdiğim meyve nedir?</label>
+      <label><input type="radio" name="q1" value="A" />A) Şeftali</label>
+      <label><input type="radio" name="q1" value="B" />B) Çilek</label>
+      <label><input type="radio" name="q1" value="C" />C) Yabanmersini</label>
+      <label><input type="radio" name="q1" value="D" />D) Kiraz</label>
+    </div>
+
+    <div class="question" id="q2">
+      <label>2. Cihangir’de seni götürdüğüm kafenin adı neydi?</label>
+      <label><input type="radio" name="q2" value="A" />A) Cafe 21</label>
+      <label><input type="radio" name="q2" value="B" />B) Mundo Novo</label>
+      <label><input type="radio" name="q2" value="C" />C) 9 Cihangir</label>
+      <label><input type="radio" name="q2" value="D" />D) Tea or Coffee</label>
+    </div>
+
+    <button type="submit">Gönder</button>
+  </form>
+
+  <div class="message" id="responseMsg"></div>
+  <a href="#" target="_blank" id="notionLink" class="notion-link hidden">Mektuba Git</a>
+
+</div>
+
+<script>
+  const releaseDate = new Date("2025-07-29T00:00:00");
+  const now = new Date();
+
+  const infoText = document.getElementById("infoText");
+  const quizForm = document.getElementById("quizForm");
+  const responseMsg = document.getElementById("responseMsg");
+  const notionLink = document.getElementById("notionLink");
+
+  if (now < releaseDate) {
+    // Henüz açılma zamanı değil
+    infoText.textContent = "Sabret! Bu mektup 29 Temmuz 2025’te açılacak.";
+  } else {
+    // Açılış zamanı geldi
+    infoText.textContent = "Soruları doğru cevapla ve mektubuna ulaş!";
+    quizForm.classList.remove("hidden");
+  }
+
+  quizForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const q1 = quizForm.elements["q1"].value;
+    const q2 = quizForm.elements["q2"].value;
+
+    // Doğru cevaplar
+    const answers = { q1: "D", q2: "C" };
+
+    // Doğru ve yanlış mesajları
+    const correctMsg = "Güzel, düşmedin";
+    const wrongMsg = "loser:b";
+
+    if (q1 === answers.q1 && q2 === answers.q2) {
+      responseMsg.textContent = correctMsg;
+      notionLink.href = "https://www.notion.so/Merhaba-sevgilim-22cb1c2000938014973cce573bd19e15?source=copy_link";
+      notionLink.classList.remove("hidden");
+    } else {
+      responseMsg.textContent = wrongMsg;
+      notionLink.classList.add("hidden");
+    }
+  });
+</script>
+
+</body>
+</html>
